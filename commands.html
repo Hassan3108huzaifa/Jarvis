@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commands</title>
+    <style>
+        body {
+            background-color: #282c34;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        nav .img1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+            width: 30px;
+        }
+
+        nav .img1 img {
+            border-radius: 50%;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #f39c12; /* Highlight color */
+        }
+
+        .socials {
+            margin-right: 2%;
+        }
+
+        .socials a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .socials a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            margin-top: 80px;
+            padding: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+
+        .content h1 {
+            font-size: 28px;
+        }
+
+        .content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .content ul li {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .content {
+                margin-top: 40%;
+                padding: 15px;
+            }
+
+            .content h1 {
+                font-size: 24px;
+            }
+
+            .content ul li {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="img1"><img src="Programming.png" alt="logo"></div>
+        <ul>
+            <li><a href="index.html">Jarvis</a></li>
+            <li><a href="commands.html">Commands</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="https://discord.gg/xCu3xt3emv" target="_blank">Discord</a></li>
+        </ul>
+        <div class="socials" style="margin-right: 2%;"><a href="https://linktr.ee/Hassan_Bhai">Socials</a></div>
+     </nav>
+
+    <div class="content">
+        <h1>Available Commands</h1>
+        <ul id="commands-list"></ul>
+    </div>
+
+    <script type="module">
+        import { getCommands } from './commands.js';
+
+        async function displayCommands() {
+            const commands = getCommands();
+            const commandsListElement = document.getElementById('commands-list');
+            const commandEntries = Object.entries(commands);
+
+            // Generate HTML for each command
+            const commandsHtml = commandEntries.map(([command, response]) => {
+                return `<li><strong>${command}</strong>`;
+            }).join('');
+
+            commandsListElement.innerHTML = commandsHtml;
+        }
+
+        displayCommands();
+    </script>
+</body>
+</html>

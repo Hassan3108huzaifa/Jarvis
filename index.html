@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Controlled Jarvis</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .img1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px; /* Adjust as needed */
+            width: 30px;  /* Adjust as needed */
+        }
+
+        .img1 img {
+            border-radius: 50%; /* Makes the logo rounded */
+            height: 100%;
+            width: 100%;
+            object-fit: cover; /* Ensures the image covers the container */
+        }
+
+        #app {
+            text-align: center;
+            padding: 20px;
+            margin-top: 70px; /* Adjusted to account for fixed nav bar height */
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #444;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 18px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        #commands {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 16px;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
+        }
+
+        #commands h2 {
+            margin-top: 0;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            #app {
+                margin-top: 60px; /* Slightly less margin for smaller screens */
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            #commands {
+                margin-top: 10px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul li a {
+                font-size: 16px;
+            }
+
+            #app h1 {
+                font-size: 24px;
+            }
+
+            button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            #commands {
+                font-size: 12px;
+                padding: 5px;
+            }
+        }
+        .socials {
+            margin-right: 2%;
+        }
+
+        .socials a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .socials a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="img1"><img src="Programming.png" alt="logo"></div>
+        <ul>
+            <li><a href="index.html">Jarvis</a></li>
+            <li><a href="commands.html">Commands</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="https://discord.gg/xCu3xt3emv" target="_blank">Discord</a></li>
+        </ul>
+        <div class="socials" style="margin-right: 2%;"><a href="https://linktr.ee/Hassan_Bhai">Socials</a></div>
+    </nav>
+
+    <div id="app">
+        <h1>Voice Controlled Jarvis</h1>
+        <div class="img" style="max-width: 600px; margin: auto;"><img src="https://cdn.dribbble.com/users/1907563/screenshots/6470979/loader_sci-fi.gif" alt="jarvis"></div>
+        <button id="start-listening">Start Listening</button>
+        <div id="status"></div>
+    </div>
+
+    <script type="module">
+        import { commands } from './commands.js';
+        import { getRandomJoke } from './jokes.js';
+        import { getRandomFact } from './randomFacts.js';
+
+        const startListeningButton = document.getElementById('start-listening');
+        const statusElement = document.getElementById('status');
+
+        startListeningButton.addEventListener('click', () => {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+
+            statusElement.textContent = 'Listening...';
+
+            recognition.onresult = async (event) => {
+                let transcript = event.results[0][0].transcript.toLowerCase();
+                console.log('Transcript:', transcript); // Debugging log
+
+                if (transcript.startsWith('jarvis')) {
+                    transcript = transcript.replace(/^jarvis\s*/, '').trim();
+                }
+
+                const responseFunction = commands[transcript];
+                if (responseFunction) {
+                    const responseMessage = await responseFunction();
+                    updateStatus(responseMessage);
+                } else {
+                    const message = 'This command is not supported';
+                    updateStatus(message);
+                }
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error', event.error);
+                updateStatus('Error occurred while listening.');
+            };
+
+            recognition.onend = () => {
+                console.log('Speech recognition ended.');
+            };
+        });
+
+        function speak(message) {
+            return new Promise((resolve) => {
+                const utterance = new SpeechSynthesisUtterance(message);
+                utterance.onend = () => resolve();
+                window.speechSynthesis.speak(utterance);
+            });
+        }
+
+        async function updateStatus(message) {
+            console.log('Updating status:', message);
+            statusElement.innerHTML = message;
+            await speak(message);
+            statusElement.innerHTML = '';
+        }
+    </script>
+</body>
+
+</html>

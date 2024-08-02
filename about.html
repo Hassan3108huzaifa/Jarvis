@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Voice Controlled Jarvis</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #1e90ff;
+        }
+
+        .img1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            width: 40px;
+        }
+
+        .img1 img {
+            border-radius: 50%;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        #app {
+            text-align: center;
+            padding: 20px;
+            margin-top: 70px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: auto;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        .socials {
+            margin-right: 2%;
+        }
+
+        .socials a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .socials a:hover {
+            color: #1e90ff;
+        }
+
+        @media (max-width: 768px) {
+            #app {
+                margin-top: 60px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            ul li {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #app {
+                margin-top: 50px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 12px;
+            }
+
+            ul li {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="img1"><img src="Programming.png" alt="logo"></div>
+        <ul>
+            <li><a href="index.html">Jarvis</a></li>
+            <li><a href="commands.html">Commands</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="https://discord.gg/xCu3xt3emv" target="_blank">Discord</a></li>
+        </ul>
+        <div class="socials"><a href="https://linktr.ee/Hassan_Bhai">Socials</a></div>
+    </nav>
+
+    <div id="app">
+        <h1>About Voice Controlled Jarvis</h1>
+        <p>
+            <strong>Voice Controlled Jarvis</strong> is an advanced voice recognition application designed to interact with users through spoken commands. Inspired by artificial intelligence and sci-fi concepts, Jarvis aims to provide a seamless and intuitive user experience.
+        </p>
+        <p>
+            With Jarvis, you can control various functions simply by speaking. The system is equipped with a range of commands that allow you to access information, perform actions, and get assistance on various topics. The application leverages modern speech recognition technology to accurately understand and respond to user inputs.
+        </p>
+        <p>Key Features:</p>
+        <ul>
+            <li>Real-time voice recognition and response</li>
+            <li>Customizable commands for various tasks</li>
+            <li>Integration with external APIs for dynamic responses</li>
+            <li>Adaptive learning to improve command accuracy over time</li>
+        </ul>
+        <p>
+            Our goal is to make interacting with technology as natural and effortless as possible. Whether you're looking for information, need to execute a command, or just want to have a conversation, Jarvis is here to assist you.
+        </p>
+    </div>
+</body>
+
+</html>
